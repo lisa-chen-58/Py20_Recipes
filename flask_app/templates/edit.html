@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Edit</title>
+</head>
+<body>
+    <form action="/recipes/update" method="POST"> 
+        <!-- sending request to server (controller) -->
+        <input type="hidden" name="id" value={{recipe.id}}>
+        <div class="form group">
+            <label for="name">Recipe Name:</label>
+            <input type="text" class="form-control" name="name" value="{{recipe.name}}">
+        </div>
+        <div class="form group">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" name="description" value="{{recipe.description}}">
+        </div>
+        <div class="form group">
+            <label for="instructions" >Instructions:</label>
+            <input type="text" class="form-control" name="instructions" value="{{recipe.instructions}}">
+        </div>
+        <div class="form group"> 
+            {% if recipe.under30 == "yes" %}
+                <input type="radio" checked="checked" name="under30" id="option1" value="{{recipe.instructions}}">
+                <label for="under30">Yes</label>
+                <input type="radio" name="under30" id="option2" value="no">
+                <label for="under30">No</label>
+            {% else %}
+                <input type="radio" name="under30" id="option1" value="{{recipe.instructions}}">
+                <label for="under30">Yes</label>
+                <input type="radio" checked="checked" name="under30" id="option2" value="no">
+                <label for="under30">No</label>
+            {% endif %}
+        </div>
+        <div class="form group">
+            <label for="date_made" >Date_Made:</label>
+            <input type="text" class="form-control" name="date_made" value="{{recipe.date_made}}">
+        </div>
+        <input type="submit" value="Update Recipe" class="btn btn-primary">
+    </form> 
+</body>
+</html>

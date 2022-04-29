@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class = "d-flex justify-content-between">
+        <h2 class="text-center">Welcome {{user.first_name}}!</h2>
+        <div>
+            <a href='/recipes/new' class="btn btn-info">Create Recipe</a>
+            <a href="/logout" class="btn btn-info">Logout</a>
+        </div>
+    </div>
+    <p>These are the recipes</p>
+    <h1 class="card-title text-center bg-info"> {{user.name}} Recipes</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Under 30 Minutes?</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+                <tr>
+                    <td>{{recipe.name}}</td>
+                    <td>{{recipe.under30}}</td>
+                    <td>
+                        <a href="/recipes/view/{{recipe.id}}">View Instructions</a>
+                        {% if recipe.users_id == session.users_id %}
+                        <a href="/recipes/edit/{{recipe.id}}">Edit</a>
+                        <a href="/recipes/delete/{{recipe.id}}">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <button href="/" type="submit" class=btn-btn-primary>Home</button>
+            </table>
+</body>
+</html>
